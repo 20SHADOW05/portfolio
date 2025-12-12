@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { skills , projects } from "./data";
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
-import { skills , projects } from "./data";
 import {
   Card,
   CardContent,
@@ -16,6 +16,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 function Header(){
     const [darkMode, setDarkMode] = useState(false);
@@ -30,7 +36,7 @@ function Header(){
         <div className = "w-full h-[9vh] flex justify-between px-4 md:px-12 border-b-2 bg-background"> 
             <div className = "flex items-center justify-center bg-background text-foreground font-irish text-3xl">Ankababu Yadav</div>
             <div className = "flex items-center justify-center bg-background">
-                <Button className = "text-base">view resume</Button>
+                <Button onClick={() => window.location.href = ""} className = "text-base">view resume</Button>
                 <button onClick={toggleTheme} className="ml-4 bg-background text-foreground rounded-md w-9 h-9 flex items-center justify-center border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground"> {darkMode ? <Sun /> : <Moon />} </button>
 
             </div>
@@ -39,7 +45,13 @@ function Header(){
 }
 
 function IntroSegment(){
-    
+    return (
+        <div>
+            <p></p>
+            <p></p>
+            <div></div>
+        </div>
+    )
 }
 
 function SkillSegment(){
@@ -95,11 +107,11 @@ function ProjectSegment(){
                     <CarouselContent className="-ml-4">
                         { projects.map((project , idx) => (
                             <CarouselItem key={idx} className="pl-4 pr-4 basis-full md:basis-1/2 lg:basis-1/3">
-                               <Card key={project.name} className = "flex flex-col w-full h-[280px] bg-card text-card-foreground border border-border shadow-sm">
-                                    <p className="flex justify-center text-lg p-4">{project.name}</p>
-                                    <CardContent>
-                                        <CardDescription className = "text-md pb-3">{project.desc}</CardDescription>
-                                        <div className="flex flex-col pb-3"> 
+                               <Card key={project.name} className = "flex flex-col justify-between w-full h-[300px] bg-card text-card-foreground border border-border shadow-sm">
+                                    <p className="flex justify-center text-lg pb-2 pt-4">{project.name}</p>
+                                    <CardContent className = "pb-0">
+                                        <CardDescription className = "text-md pb-4">{project.desc}</CardDescription>
+                                        <div className="flex flex-col pb-2"> 
                                             <div className="text-md py-1">Tech Stack</div> 
                                             <div className="flex text-md">
                                                 { project.tech_stack.split(",")
@@ -112,7 +124,29 @@ function ProjectSegment(){
                                             </div>
                                         </div>
                                     </CardContent>
-                                    <CardFooter></CardFooter>
+                                    <CardFooter className = "flex justify-between">
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <img onClick={() => window.open(project.demo_link, "_blank")} src="/images/icons/link-grey.png" alt="Demo link" className="w-5 h-5"/>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Demo link</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                        
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <img onClick={() => window.open(project.repo_link, "_blank")} src="/images/icons/github-white.svg" alt="Repo link" className="w-6 h-6"/>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Repo link</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    </CardFooter>
                                 </Card>
                             </CarouselItem>
                         ))}
