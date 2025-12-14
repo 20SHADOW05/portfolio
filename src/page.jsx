@@ -54,8 +54,8 @@ function IntroSegment(){
                 "I’m passionate about backend and low-level systems, with a keen interest in how systems work behind the scenes. I enjoy tackling challenges that make applications run smoothly and efficiently. Building reliable, well-structured code is what drives me. I like being part of the process that powers software from the ground up."
             </div>
             <div className="flex gap-8">
-                <FaGithub onClick={() => window.open("", "_blank")} className="w-7 h-7 cursor-pointer"> </FaGithub>
-                <FaLinkedin onClick={() => window.open("", "_blank")} className="w-7 h-7 cursor-pointer"> </FaLinkedin>
+                <FaGithub onClick={() => window.open("https://github.com/20SHADOW05", "_blank")} className="w-7 h-7 cursor-pointer"> </FaGithub>
+                <FaLinkedin onClick={() => window.open("https://www.linkedin.com/in/ankababu-s-351829358/", "_blank")} className="w-7 h-7 cursor-pointer"> </FaLinkedin>
                 <Mail className="w-7 h-7 cursor-pointer"></Mail>
             </div>
         </div>    
@@ -123,18 +123,18 @@ function ProjectSegment(){
                     <CarouselContent className="-ml-4">
                         { projects.map((project , idx) => (
                             <CarouselItem key={idx} className="pl-4 pr-4 basis-full md:basis-1/2 lg:basis-1/3">
-                               <Card key={project.name} className = "flex flex-col justify-between w-full h-[300px] bg-card text-card-foreground border border-border shadow-sm">
+                               <Card key={project.name} className = "flex flex-col justify-between w-full h-[320px] bg-card text-card-foreground border border-border shadow-sm">
                                     <p className="flex justify-center text-lg pb-2 pt-4">{project.name}</p>
                                     <CardContent className = "pb-0">
                                         <CardDescription className = "text-md pb-4">{project.desc}</CardDescription>
                                         <div className="flex flex-col pb-2 text-muted-foreground"> 
                                             <span className="text-md my-1 w-fit border-b">Tech Stack</span> 
-                                            <div className="flex text-md">
+                                            <div className="flex flex-wrap text-md">
                                                 { project.tech_stack.split(",")
                                                                         .map((tech, index, arr) => (
                                                                             <span key={index} className="flex items-center">
                                                                                 <span>{tech.trim()}</span>
-                                                                                { index != arr.length - 1 && (<span className="mx-3">|</span>)  
+                                                                                { index != arr.length - 1 && (<span className="mx-2">|</span>)  
                                                                                 // (<Separator orientation="vertical" className="mx-2 h-4 w-[2px] bg-muted-foreground"/>)
                                                                                 }
                                                                             </span>
@@ -171,8 +171,8 @@ function ProjectSegment(){
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                    <CarouselPrevious className="-left-4 md:left-4 lg:-left-12" />
+                    <CarouselNext className="right-0 md:right-4 lg:-right-8" />
                 </Carousel>
             </div>
         </div>
