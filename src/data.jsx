@@ -1,5 +1,5 @@
 export const skills = {
-  programmingLanguages: [
+  languagesAndDatabases: [
     { name: "javascript", icon: "/images/programming_languages/javascript.svg" },
     { name: "java", icon: "/images/programming_languages/java.svg" },
     { name: "postgre", icon: "/images/programming_languages/postgresql.svg" },

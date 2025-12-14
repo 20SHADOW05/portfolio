@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { skills , projects } from "./data";
+import { useState, useEffect } from "react"
+import { skills , projects } from "./data"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Mail, Link } from "lucide-react"
+import { FaGithub, FaLinkedin } from "react-icons/fa"
 import {
   Card,
   CardContent,
@@ -33,36 +34,47 @@ function Header(){
     }
 
     return (
-        <div className = "w-full h-[9vh] flex justify-between px-4 md:px-12 border-b-2 bg-background"> 
-            <div className = "flex items-center justify-center bg-background text-foreground font-irish text-3xl">Ankababu Yadav</div>
-            <div className = "flex items-center justify-center bg-background">
+        <div className = "w-full h-[9vh] sticky top-0 z-50 flex justify-between px-4 md:px-12 bg-background dark:bg-[#0f0f0f] border-b"> 
+            <div className = "flex items-center justify-center font-irish text-3xl text-[#e44e58]">Ankababu Yadav</div>
+            <div className = "flex items-center justify-center">
                 <Button onClick={() => window.location.href = ""} className = "text-base">view resume</Button>
-                <button onClick={toggleTheme} className="ml-4 bg-background text-foreground rounded-md w-9 h-9 flex items-center justify-center border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground"> {darkMode ? <Sun /> : <Moon />} </button>
-
+                <button onClick={toggleTheme} className="ml-4 text-foreground rounded-md w-9 h-9 flex items-center justify-center border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground"> {darkMode ? <Sun /> : <Moon />} </button>
             </div>
         </div>
     )
 }
 
+const letters = "HELLO";
 function IntroSegment(){
+
     return (
-        <div>
-            <p></p>
-            <p></p>
-            <div></div>
-        </div>
+        <div className="flex flex-col items-center gap-5 m-8 my-24">
+            <div className="font-poppinsBold text-center text-5xl"><span className="text-[#e44e58]">Hello, </span>I'm Ankababu</div>
+            <div className=" flex justify-center text-center max-w-3xl italic text-lg">
+                "I’m passionate about backend and low-level systems, with a keen interest in how systems work behind the scenes. I enjoy tackling challenges that make applications run smoothly and efficiently. Building reliable, well-structured code is what drives me. I like being part of the process that powers software from the ground up."
+            </div>
+            <div className="flex gap-8">
+                <FaGithub onClick={() => window.open("", "_blank")} className="w-7 h-7 cursor-pointer"> </FaGithub>
+                <FaLinkedin onClick={() => window.open("", "_blank")} className="w-7 h-7 cursor-pointer"> </FaLinkedin>
+                <Mail className="w-7 h-7 cursor-pointer"></Mail>
+            </div>
+        </div>    
     )
 }
 
 function SkillSegment(){
     return (
         <div className="m-8 mb-24">
-            <div className="mb-8 flex items-center justify-center bg-background text-foreground text-3xl">skills</div>
+            <div className="flex justify-center mb-8">
+                <div className="relative inline-block text-2xl text-foreground border-b border-b-[#e44e58]">
+                    SKILLS
+                </div>
+            </div>
             <div className="flex justify-center flex-wrap gap-8">
                 <Card className = "w-full max-w-sm bg-card text-card-foreground border border-border shadow-sm">
-                    <p className="p-4 mb-6 flex justify-center font-semibold">Programming Languages</p>
+                    <p className="p-4 mb-6 flex justify-center text-[1.1rem]">Languages & Databases</p>
                     <CardContent className = "flex flex-wrap justify-evenly gap-10 px-5">
-                        { skills.programmingLanguages.map((skill) => (
+                        { skills.languagesAndDatabases.map((skill) => (
                             <div key={skill.name} className="flex flex-col flex-wrap items-center gap-2">
                                 <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
                                 <span className="capitalize text-[0.9rem]">{skill.name}</span>
@@ -71,7 +83,7 @@ function SkillSegment(){
                     </CardContent>
                 </Card>
                 <Card className = "w-full max-w-sm bg-card text-card-foreground border border-border shadow-sm">
-                    <p className="p-4 mb-6 flex justify-center font-semibold">Frameworks & Libraries</p>
+                    <p className="p-4 mb-6 flex justify-center text-[1.1rem]">Frameworks & Libraries</p>
                     <CardContent className = "flex flex-wrap justify-evenly gap-10 px-5">
                         { skills.frameworksAndLibraries.map((skill) => (
                             <div key={skill.name} className="flex flex-col flex-wrap items-center gap-2">
@@ -82,7 +94,7 @@ function SkillSegment(){
                     </CardContent>
                 </Card>
                 <Card className = "w-full max-w-sm bg-card text-card-foreground border border-border shadow-sm">
-                    <p className="p-4 mb-6 flex justify-center font-semibold">Development Tools</p>
+                    <p className="p-4 mb-6 flex justify-center text-[1.1rem]">Development Tools</p>
                     <CardContent className = "flex flex-wrap justify-evenly gap-10 px-5">
                         { skills.developmentTools.map((skill) => (
                             <div key={skill.name} className="flex flex-col flex-wrap items-center gap-2">
@@ -95,13 +107,17 @@ function SkillSegment(){
             </div>
         </div>
     ) 
-
 }
 
 function ProjectSegment(){
     return (
-        <div className="m-8">
-            <div className="mb-8 flex items-center justify-center bg-background text-foreground text-3xl">Projects</div>
+        <div className="m-8 pb-8">
+            <div className="flex justify-center mb-8">
+                <div className="relative inline-block text-2xl text-foreground border-b border-b-[#e44e58]">
+                    PROJECTS
+                </div>
+            </div>
+
             <div className="w-full flex justify-center ">
                 <Carousel className="w-full max-w-6xl">
                     <CarouselContent className="-ml-4">
@@ -111,41 +127,45 @@ function ProjectSegment(){
                                     <p className="flex justify-center text-lg pb-2 pt-4">{project.name}</p>
                                     <CardContent className = "pb-0">
                                         <CardDescription className = "text-md pb-4">{project.desc}</CardDescription>
-                                        <div className="flex flex-col pb-2"> 
-                                            <div className="text-md py-1">Tech Stack</div> 
+                                        <div className="flex flex-col pb-2 text-muted-foreground"> 
+                                            <span className="text-md my-1 w-fit border-b">Tech Stack</span> 
                                             <div className="flex text-md">
                                                 { project.tech_stack.split(",")
                                                                         .map((tech, index, arr) => (
                                                                             <span key={index} className="flex items-center">
-                                                                                <span>{tech}</span>
-                                                                                { index != arr.length - 1 && (<Separator orientation="vertical" className="mx-2 h-4 w-0.5"/>)}
+                                                                                <span>{tech.trim()}</span>
+                                                                                { index != arr.length - 1 && (<span className="mx-3">|</span>)  
+                                                                                // (<Separator orientation="vertical" className="mx-2 h-4 w-[2px] bg-muted-foreground"/>)
+                                                                                }
                                                                             </span>
                                                                         ))}
                                             </div>
                                         </div>
                                     </CardContent>
                                     <CardFooter className = "flex justify-between">
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <img onClick={() => window.open(project.demo_link, "_blank")} src="/images/icons/link-grey.png" alt="Demo link" className="w-5 h-5"/>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p>Demo link</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
                                         
                                         <TooltipProvider>
                                             <Tooltip>
                                                 <TooltipTrigger asChild>
-                                                    <img onClick={() => window.open(project.repo_link, "_blank")} src="/images/icons/github-white.svg" alt="Repo link" className="w-6 h-6"/>
+                                                    <FaGithub onClick={() => window.open(project.repo_link, "_blank")} className="w-6 h-6"> </FaGithub>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
                                                     <p>Repo link</p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </TooltipProvider>
+
+                                        { project.name != "Arch dotfiles"  && 
+                                            (<TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Link onClick={() => window.open(project.demo_link, "_blank")} className="w-5 h-5"></Link>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>Demo link</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>)}
                                     </CardFooter>
                                 </Card>
                             </CarouselItem>

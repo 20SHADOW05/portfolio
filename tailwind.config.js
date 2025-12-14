@@ -17,6 +17,7 @@ module.exports = {
 		fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         irish: ["IrishGrover", "cursive"],
+		poppinsBold: ["PoppinsBold", "sans-serif"],
       	},
   		colors: {
   			border: 'hsl(var(--border))',
