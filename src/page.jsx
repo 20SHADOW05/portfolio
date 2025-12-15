@@ -44,19 +44,40 @@ function Header(){
     )
 }
 
-const letters = "HELLO";
 function IntroSegment(){
+    const [displayText, setDisplayText] = useState("");
+    const fullText = "Hello,";
+
+    useEffect(() => {
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+            if (currentIndex <= fullText.length) {
+                setDisplayText(fullText.slice(0, currentIndex));
+                currentIndex++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 150);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="flex flex-col items-center gap-5 m-8 my-24">
-            <div className="font-poppinsBold text-center text-5xl"><span className="text-[#e44e58]">Hello, </span>I'm Ankababu</div>
+            <div className="font-poppinsBold text-center text-5xl"><span className="text-[#e44e58]">{displayText} </span>I'm Ankababu</div>
             <div className=" flex justify-center text-center max-w-3xl italic text-lg">
                 "I’m passionate about backend and low-level systems, with a keen interest in how systems work behind the scenes. I enjoy tackling challenges that make applications run smoothly and efficiently. Building reliable, well-structured code is what drives me. I like being part of the process that powers software from the ground up."
             </div>
-            <div className="flex gap-8">
-                <FaGithub onClick={() => window.open("https://github.com/20SHADOW05", "_blank")} className="w-7 h-7 cursor-pointer"> </FaGithub>
-                <FaLinkedin onClick={() => window.open("https://www.linkedin.com/in/ankababu-s-351829358/", "_blank")} className="w-7 h-7 cursor-pointer"> </FaLinkedin>
-                <Mail className="w-7 h-7 cursor-pointer"></Mail>
+            <div className="flex gap-8 items-center justify-center flex-wrap">
+                <div className="flex items-center justify-center gap-4 border rounded-md p-1 bg-border">
+                    <Mail className="w-6 h-6 cursor-pointer"></Mail>
+                    <span>ankababu774@gmail.com</span>
+                </div>
+                <div className="flex gap-8 items-center justify-center">
+                    <FaGithub onClick={() => window.open("https://github.com/20SHADOW05", "_blank")} className="w-7 h-7 cursor-pointer"> </FaGithub>
+                    <FaLinkedin onClick={() => window.open("https://www.linkedin.com/in/ankababu-s-351829358/", "_blank")} className="w-7 h-7 cursor-pointer"> </FaLinkedin>
+                </div>
+                
             </div>
         </div>    
     )
@@ -123,7 +144,7 @@ function ProjectSegment(){
                     <CarouselContent className="-ml-4">
                         { projects.map((project , idx) => (
                             <CarouselItem key={idx} className="pl-4 pr-4 basis-full md:basis-1/2 lg:basis-1/3">
-                               <Card key={project.name} className = "flex flex-col justify-between w-full h-[320px] bg-card text-card-foreground border border-border shadow-sm">
+                               <Card key={project.name} className = "flex flex-col justify-between w-full h-[320px] dark:bg-card text-card-foreground border border-border shadow-sm bg-accent">
                                     <p className="flex justify-center text-lg pb-2 pt-4">{project.name}</p>
                                     <CardContent className = "pb-0">
                                         <CardDescription className = "text-md pb-4">{project.desc}</CardDescription>
@@ -147,7 +168,7 @@ function ProjectSegment(){
                                         <TooltipProvider>
                                             <Tooltip>
                                                 <TooltipTrigger asChild>
-                                                    <FaGithub onClick={() => window.open(project.repo_link, "_blank")} className="w-6 h-6"> </FaGithub>
+                                                    <FaGithub onClick={() => window.open(project.repo_link, "_blank")} className="w-6 h-6 cursor-pointer"> </FaGithub>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
                                                     <p>Repo link</p>
@@ -159,7 +180,7 @@ function ProjectSegment(){
                                             (<TooltipProvider>
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
-                                                        <Link onClick={() => window.open(project.demo_link, "_blank")} className="w-5 h-5"></Link>
+                                                        <Link onClick={() => window.open(project.demo_link, "_blank")} className="w-5 h-5 cursor-pointer"></Link>
                                                     </TooltipTrigger>
                                                     <TooltipContent>
                                                         <p>Demo link</p>
@@ -178,9 +199,6 @@ function ProjectSegment(){
         </div>
     )
 }
-
-// <CarouselPrevious className="left-2 md:left-8 z-50" />
-// <CarouselNext className="right-2 md:right-8 z-50" />
 
 export default function Page(){
     return (
