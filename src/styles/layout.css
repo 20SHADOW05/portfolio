@@ -1,0 +1,18 @@
+.site-wrap {
+  min-height: 100vh;
+  padding: 72px var(--pad) 120px;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+  max-width: var(--max-w);
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+@media (max-width: 640px) {
+  .site-wrap { padding: 48px 24px 80px; }
+}

@@ -1,0 +1,38 @@
+export const projects = [
+  {
+    id: 1,
+    title: "depGraph",
+    description: null,
+    tags: [],
+    github: null,
+    live: null,
+    image: null,
+  },
+  {
+    id: 2,
+    title: "Project Two",
+    description: null,
+    tags: [],
+    github: null,
+    live: null,
+    image: null,
+  },
+  {
+    id: 3,
+    title: "Project Three",
+    description: null,
+    tags: [],
+    github: null,
+    live: null,
+    image: null,
+  },
+  {
+    id: 4,
+    title: "Project Four",
+    description: null,
+    tags: [],
+    github: null,
+    live: null,
+    image: null,
+  },
+];
